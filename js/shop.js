@@ -723,15 +723,18 @@ function setupModals() {
             items: cart,
             total,
             status: (paymentMethod === 'cash') ? 'En attente de livraison' : 'En attente de validation',
-            createdAt: db ? firebase.firestore.FieldValue.serverTimestamp() : new Date()
+            createdAt: db ? firebase.firestore.FieldValue.serverTimestamp() : new Date().toISOString()
         };
         
         try {
             if(db) {
                 await db.collection("orders").add(orderData);
             } else {
-                console.log("Mode démo: Commande fictive");
-                await new Promise(r => setTimeout(r, 1000));
+                console.log("Sauvegarde de la commande en local");
+                let existingOrders = JSON.parse(localStorage.getItem('localOrders') || '[]');
+                existingOrders.push(orderData);
+                localStorage.setItem('localOrders', JSON.stringify(existingOrders));
+                await new Promise(r => setTimeout(r, 800)); // Simulation de chargement
             }
             
             // Generate receipt
