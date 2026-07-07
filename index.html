@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anrif Shop | Friperie de Luxe à Dakar</title>
+    <meta name="description"
+        content="Anrif Shop - Boutique de ventes friperie de Luxe fin de série pour Homme, Femme, enfant à Dakar.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">ANRIF<span>SHOP</span></a>
+            <nav class="nav-links">
+                <a href="#collections">Collections</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <div class="auth-dropdown-container">
+                    <button class="auth-dropdown-trigger" id="open-auth-btn">
+                        <i data-lucide="user"></i> <span id="auth-btn-text">Se connecter</span> <i data-lucide="chevron-down" style="width: 16px; height: 16px; margin-left: 2px;"></i>
+                    </button>
+                    
+                    <div class="auth-dropdown-menu">
+                        <div id="auth-menu-logged-out">
+                            <button class="btn btn-primary" id="menu-login-btn" style="width: 100%; padding: 0.6rem; font-size: 0.95rem; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(214, 64, 124, 0.3);">Se connecter</button>
+                            <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
+                            <div class="auth-menu-links">
+                                <a href="#"><i data-lucide="user"></i> Votre compte</a>
+                                <a href="#"><i data-lucide="box"></i> Vos commandes</a>
+                                <a href="#"><i data-lucide="heart"></i> Favoris</a>
+                            </div>
+                        </div>
+                        
+                        <div id="auth-menu-logged-in" style="display: none;">
+                            <p style="margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; color: var(--text-main);">Bonjour, <span id="menu-user-name" style="color: var(--accent);"></span></p>
+                            <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
+                            <div class="auth-menu-links">
+                                <a href="#"><i data-lucide="user"></i> Votre compte</a>
+                                <a href="#"><i data-lucide="box"></i> Vos commandes</a>
+                                <a href="#"><i data-lucide="heart"></i> Favoris</a>
+                            </div>
+                            <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
+                            <button class="btn btn-outline" id="menu-logout-btn" style="width: 100%; padding: 0.5rem; font-size: 0.9rem; color: var(--danger); border-color: var(--danger);"><i data-lucide="log-out" style="width: 16px; height: 16px; margin-right: 5px; vertical-align: middle;"></i> Déconnexion</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="cart-btn" id="open-notif-btn" style="margin-right: 0.5rem;">
+                    <i data-lucide="bell"></i>
+                    <span class="cart-count" id="notif-count" style="background: var(--primary);">2</span>
+                </button>
+                <button class="cart-btn" id="open-cart-btn">
+                    <i data-lucide="shopping-bag"></i>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+                <a href="tel:+221782559701" class="btn btn-outline btn-sm">
+                    <i data-lucide="phone"></i> +221 78 255 9701
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero-section" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge fade-up">Nouvelle Arrivage</span>
+            <h1 class="hero-title fade-up stagger-1">L'Élégance de la <br><span>Friperie de Luxe</span></h1>
+            <p class="hero-subtitle fade-up stagger-2">Fin de série pour Homme, Femme et Enfant à Dakar. Découvrez des
+                pièces uniques soigneusement sélectionnées.</p>
+            <div class="hero-actions fade-up stagger-3">
+                <a href="#produits" class="btn btn-primary">Acheter Maintenant</a>
+                <a href="#contact" class="btn btn-secondary">Nous Contacter</a>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Défiler</p>
+        </div>
+    </section>
+
+    <!-- Trending Section -->
+    <section id="trending-section" class="categories" style="background-color: var(--white); padding-bottom: 2rem;">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Nos produits en vogue</h2>
+                <p>Découvrez les looks les plus convoités de la saison.</p>
+            </div>
+            
+            <div class="bento-grid">
+                <!-- 1. Robe Classe (Large) -->
+                <div class="bento-item bento-large fade-up" style="background-image: url('https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                    <div class="bento-content">
+                        <h3>Robe Classe</h3>
+                        <span>Découvrir la pièce</span>
+                    </div>
+                </div>
+                
+                <!-- 2. Pantalon 1 -->
+                <div class="bento-item fade-up stagger-1" style="background-image: url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                    <div class="bento-content">
+                        <h3>Pantalon Élégant</h3>
+                        <span>Voir</span>
+                    </div>
+                </div>
+                
+                <!-- 3. Haut Grande Dame -->
+                <div class="bento-item fade-up stagger-2" style="background-image: url('https://images.unsplash.com/photo-1588117305388-c2631a279f82?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                    <div class="bento-content">
+                        <h3>Haut Grande Dame</h3>
+                        <span>Voir</span>
+                    </div>
+                </div>
+                
+                <!-- 4. Chaussures Villes -->
+                <div class="bento-item fade-up stagger-3" style="background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                    <div class="bento-content">
+                        <h3>Chaussures Villes</h3>
+                        <span>Voir</span>
+                    </div>
+                </div>
+                
+                <!-- 5. Pantalon 2 -->
+                <div class="bento-item fade-up stagger-4" style="background-image: url('https://images.unsplash.com/photo-1584865288642-42078afe6942?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                    <div class="bento-content">
+                        <h3>Pantalon Chic</h3>
+                        <span>Voir</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories-section" class="categories">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Nos Univers</h2>
+                <p>Explorez nos différentes catégories de vêtements et accessoires fin de série.</p>
+            </div>
+
+            <div class="category-grid">
+                <!-- Category Homme -->
+                <div class="category-card fade-up filter-category" data-category="Homme"
+                    style="background-image: url('https://images.unsplash.com/photo-1617137968427-85924c800a22?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Homme</h3>
+                        <p>Vestes, chemises et costumes</p>
+                    </div>
+                </div>
+
+                <!-- Category Femme -->
+                <div class="category-card fade-up filter-category stagger-1" data-category="Femme"
+                    style="background-image: url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Femme</h3>
+                        <p>Robes, tailleurs et élégance</p>
+                    </div>
+                </div>
+
+                <!-- Category Enfant -->
+                <div class="category-card fade-up filter-category stagger-2" data-category="Enfant"
+                    style="background-image: url('https://images.unsplash.com/photo-1519689680058-324335c77eba?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Enfant</h3>
+                        <p>Style et confort</p>
+                    </div>
+                </div>
+
+                <!-- Category Accessoires -->
+                <div class="category-card fade-up filter-category" data-category="Accessoires"
+                    style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Accessoires</h3>
+                        <p>Lunettes et bijoux</p>
+                    </div>
+                </div>
+
+                <!-- Category Sacs -->
+                <div class="category-card fade-up filter-category stagger-1" data-category="Sacs"
+                    style="background-image: url('https://images.unsplash.com/photo-1591561954557-26941169b49e?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Sacs</h3>
+                        <p>Sacs à main femme & luxe</p>
+                    </div>
+                </div>
+
+                <!-- Category Chaussures -->
+                <div class="category-card fade-up filter-category stagger-2" data-category="Chaussures"
+                    style="background-image: url('https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop&q=80');">
+                    <div class="category-overlay"></div>
+                    <div class="category-content">
+                        <h3>Chaussures</h3>
+                        <p>Baskets et souliers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="featured-produits" class="products-section" style="background-color: var(--white); padding-bottom: 2rem;">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2>Nos produits à la une</h2>
+                <p>Découvrez nos tous derniers arrivages.</p>
+            </div>
+            <div class="products-grid" id="featured-products-grid">
+                <!-- Les produits à la une seront injectés ici par JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section (Example) -->
+    <section id="produits" class="products-section">
+        <div class="container">
+            <div class="section-header fade-up">
+                <h2 id="products-section-title">Tous nos produits</h2>
+                <p>Découvrez notre sélection du moment.</p>
+                <button id="reset-filter-btn" class="btn btn-outline btn-sm hidden" style="margin-top: 1rem;"><i
+                        data-lucide="filter-X"></i> Voir toutes les catégories</button>
+            </div>
+
+            <div class="products-grid" id="products-grid">
+                <!-- Les produits seront injectés ici par JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Auth Modal -->
+    <div class="checkout-modal" id="auth-modal">
+        <div class="cart-modal-overlay" id="auth-overlay"></div>
+        <div class="checkout-modal-content" style="max-width: 400px; padding: 2rem;">
+            <div class="cart-header" style="border:none; padding-bottom: 0;">
+                <h2 id="auth-title">Connexion</h2>
+                <button class="close-cart" id="close-auth-btn"><i data-lucide="x"></i></button>
+            </div>
+            <form id="auth-form" class="checkout-form" style="margin-top: 1.5rem;">
+                <div id="auth-signup-fields" style="display:none;">
+                    <div class="form-group">
+                        <label>Prénom et Nom</label>
+                        <input type="text" id="auth-name" placeholder="Votre nom complet">
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="tel" id="auth-phone" placeholder="Ex: 77 123 45 67">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse par défaut</label>
+                        <textarea id="auth-address" placeholder="Quartier, Ville..." rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label id="auth-email-label">Email ou Prénom et Nom</label>
+                    <input type="text" id="auth-email" required placeholder="votre@email.com ou Alioune Fall">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="auth-password" required placeholder="••••••••">
+                </div>
+                <p id="auth-error" style="color:#EE5D50; font-size:0.9rem; margin-bottom:1rem;"></p>
+                <button type="submit" class="btn btn-primary btn-large w-100" id="auth-submit-btn">Se connecter</button>
+                <p style="text-align:center; margin-top:1rem; font-size:0.9rem;">
+                    <a href="#" id="toggle-auth-mode" style="color:var(--primary); text-decoration:none;">Pas encore de
+                        compte ? S'inscrire</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notification Modal -->
+    <div class="cart-modal" id="notif-modal">
+        <div class="cart-modal-overlay" id="notif-overlay"></div>
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Notifications</h2>
+                <button class="close-cart" id="close-notif-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="cart-items" id="notif-items" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                <!-- Dummy notifications -->
+                <div class="notif-item" style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h4 style="margin-bottom: 0.2rem; color: var(--primary); font-size: 1rem;">Nouvelle collection !</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Découvrez nos nouveaux arrivages de sacs de luxe. Venez vite en boutique !</p>
+                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i data-lucide="clock" style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il y a 2 heures</span>
+                </div>
+                <div class="notif-item" style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h4 style="margin-bottom: 0.2rem; color: var(--primary); font-size: 1rem;">Promo Spéciale</h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Profitez de -20% sur toutes les chaussures femme ce week-end avec le code ANRIF20.</p>
+                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i data-lucide="clock" style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il y a 1 jour</span>
+                </div>
+            </div>
+            <div class="cart-footer">
+                <button class="btn btn-primary btn-large w-100" id="mark-read-btn">Tout marquer comme lu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-modal-overlay" id="cart-overlay"></div>
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Votre Panier</h2>
+                <button class="close-cart" id="close-cart-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <!-- Articles du panier -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total (sans livraison):</span>
+                    <span id="cart-total-price">0 FCFA</span>
+                </div>
+                <button class="btn btn-primary btn-large w-100" id="checkout-btn">Passer à la caisse</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkout-modal">
+        <div class="cart-modal-overlay" id="checkout-overlay"></div>
+        <div class="checkout-modal-content">
+            <div class="cart-header">
+                <h2>Finaliser la Commande</h2>
+                <button class="close-cart" id="close-checkout-btn"><i data-lucide="x"></i></button>
+            </div>
+            <form id="checkout-form" class="checkout-form">
+                <div class="form-group">
+                    <label>Nom complet</label>
+                    <input type="text" id="order-name" required placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label>Numéro de téléphone</label>
+                    <input type="tel" id="order-phone" required placeholder="Ex: 77 123 45 67">
+                </div>
+                <div class="form-group">
+                    <label>Adresse de livraison</label>
+                    <textarea id="order-address" required placeholder="Quartier, Ville..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Méthode de Paiement</label>
+                    <div
+                        style="display:flex; flex-direction:column; gap:0.8rem; margin-top:0.5rem; border:1px solid var(--border); padding:1rem; border-radius:10px;">
+                        <label
+                            style="font-weight:normal; display:flex; align-items:center; gap:0.8rem; cursor:pointer;">
+                            <input type="radio" name="payment-method" value="wave" required>
+                            <div
+                                style="width:30px; height:30px; background:#12D1F4; border-radius:6px; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.7rem;">
+                                W</div> Wave
+                        </label>
+                        <label
+                            style="font-weight:normal; display:flex; align-items:center; gap:0.8rem; cursor:pointer;">
+                            <input type="radio" name="payment-method" value="orange" required>
+                            <div
+                                style="width:30px; height:30px; background:#FF7900; border-radius:6px; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; font-size:0.7rem;">
+                                OM</div> Orange Money
+                        </label>
+                        <label
+                            style="font-weight:normal; display:flex; align-items:center; gap:0.8rem; cursor:pointer;">
+                            <input type="radio" name="payment-method" value="cash" required>
+                            <div
+                                style="width:30px; height:30px; background:#F4F7FE; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--text-main);">
+                                <i data-lucide="banknote" style="width:16px;"></i></div> À la livraison
+                        </label>
+                    </div>
+                </div>
+
+                <div id="payment-instructions"
+                    style="display:none; background:#F4F7FE; padding:1rem; border-radius:10px; margin-bottom:1.5rem; border-left:4px solid var(--primary);">
+                    <h4 style="margin-bottom:0.5rem; color:var(--text-main); font-size:0.95rem;">Instructions de
+                        Paiement</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;" id="payment-text"></p>
+                    <p
+                        style="font-weight:bold; font-size:1.2rem; color:var(--primary); margin-bottom:1rem; letter-spacing:1px;">
+                        78 255 97 01</p>
+                    <div class="form-group" style="margin-bottom:0;">
+                        <label style="font-size:0.85rem;">Saisissez le N° de Transaction (Reçu par SMS)</label>
+                        <input type="text" id="transaction-id" placeholder="Ex: CI24050..."
+                            style="padding:0.6rem; font-size:0.9rem;">
+                    </div>
+                </div>
+
+                <div class="payment-info" style="margin-bottom:1.5rem;">
+                    <i data-lucide="info"></i>
+                    <p>Frais de livraison partout au Sénégal : <strong>2000 FCFA</strong>.</p>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large w-100" id="submit-order-btn">Confirmer la
+                    Commande</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="checkout-modal" id="receipt-modal">
+        <div class="cart-modal-overlay"></div>
+        <div class="checkout-modal-content" style="max-width: 500px; padding: 2.5rem 2rem;">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <div
+                    style="width:60px; height:60px; background:#E6FAF5; color:#05CD99; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem;">
+                    <i data-lucide="check-circle" style="width:32px; height:32px;"></i>
+                </div>
+                <h2 style="font-family:var(--font-heading); font-size:1.8rem; margin-bottom:0.5rem;">Commande Confirmée
+                    !</h2>
+                <p style="color:var(--text-muted); font-size:0.95rem;">Merci pour votre achat. Voici votre reçu.</p>
+            </div>
+
+            <div id="receipt-content"
+                style="background:#F9FAFC; border:1px dashed var(--border); border-radius:10px; padding:1.5rem; margin-bottom:1.5rem;">
+                <!-- Receipt details injected here -->
+            </div>
+
+            <div style="display:flex; gap:1rem;">
+                <button class="btn btn-outline" id="close-receipt-btn" style="flex:1;">Fermer</button>
+                <button class="btn btn-primary" id="print-receipt-btn" style="flex:1;"><i data-lucide="printer"></i>
+                    Imprimer le reçu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-container fade-up">
+            <h2>Prêt à renouveler votre garde-robe ?</h2>
+            <p>Passez en boutique ou contactez-nous pour réserver vos pièces favorites avant rupture de
+                stock.<br><br><strong>Livraison partout au Sénégal à 2000 FCFA.</strong></p>
+            <a href="https://wa.me/221782559701" class="btn btn-primary btn-large" target="_blank"
+                rel="noopener noreferrer">
+                <i data-lucide="message-circle"></i> Discuter sur WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h2>ANRIF<span>SHOP</span></h2>
+                <p>La référence de la friperie de luxe et des vêtements fin de série à Dakar. Des pièces uniques pour un
+                    style authentique.</p>
+            </div>
+
+            <div class="footer-contact">
+                <h3>Contactez-nous</h3>
+                <ul class="contact-list">
+                    <li>
+                        <i data-lucide="phone"></i>
+                        <a href="tel:+221782559701">+221 78 255 97 01</a>
+                    </li>
+                    <li>
+                        <i data-lucide="map-pin"></i>
+                        <span>Dakar, Sénégal</span>
+                    </li>
+                    <li>
+                        <i data-lucide="clock"></i>
+                        <span>Lun - Sam: 9h00 - 20h00</span>
+                    </li>
+                    <li>
+                        <i data-lucide="truck"></i>
+                        <span>Livraison au Sénégal : 2000 FCFA</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-social">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i
+                            data-lucide="instagram"></i></a>
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
+                            data-lucide="facebook"></i></a>
+                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i
+                            data-lucide="twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Anrif Shop. Tous droits réservés. <span style="margin-left: 10px; opacity: 0.5; cursor: pointer;" id="toggle-admin-btn" title="Activer le mode Admin"><i data-lucide="settings" style="width: 14px; height: 14px; vertical-align: middle;"></i> Admin</span></p>
+        </div>
+    </footer>
+
+    <!-- Add Product Modal (Admin Mode) -->
+    <div id="product-modal" class="cart-modal">
+        <div class="cart-modal-overlay" id="close-product-overlay"></div>
+        <div class="cart-modal-content">
+            <div class="cart-header">
+                <h2>Ajouter un Nouveau Produit</h2>
+                <button id="close-product-btn" class="close-cart"><i data-lucide="x"></i></button>
+            </div>
+            <form id="add-product-form" style="display: flex; flex-direction: column; flex: 1; overflow: hidden; max-height: calc(90vh - 70px);">
+                <div class="cart-items" style="padding: 1.5rem; overflow-y: auto; flex: 1;">
+                    <div class="form-group">
+                        <label>Nom du Produit</label>
+                        <input type="text" id="prod-name" required placeholder="Ex: Chemise en Lin">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix (FCFA)</label>
+                        <input type="number" id="prod-price" required placeholder="15000">
+                    </div>
+                    <div class="form-group">
+                        <label>Tailles disponibles</label>
+                        <input type="text" id="prod-size" required placeholder="Ex: S, M, L, XL ou 40, 41, 42">
+                        <small style="color:var(--text-muted); font-size:0.8rem; margin-top:4px; display:block;">Séparez les tailles par des virgules pour permettre au client de choisir.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select id="prod-category" required style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                            <option value="Enfant">Enfant</option>
+                            <option value="Accessoires">Accessoires</option>
+                            <option value="Sacs">Sacs</option>
+                            <option value="Chaussures">Chaussures</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Image du Produit</label>
+                        <div id="image-dropzone" style="position: relative; width: 100%; padding: 2.5rem 1.5rem; border: 2px dashed #CBD5E1; border-radius: 12px; background: #F8FAFC; text-align: center; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <i data-lucide="upload-cloud" style="width: 40px; height: 40px; color: #94A3B8; margin-bottom: 1rem; transition: color 0.3s ease;"></i>
+                            <p style="margin: 0 0 0.5rem 0; font-size: 1rem; color: #334155; font-weight: 500;">Glissez-déposez une image ici</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">ou cliquez pour parcourir les fichiers</p>
+                            <input type="file" id="prod-img-file" accept="image/*" required style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        </div>
+                        <input type="hidden" id="prod-img-base64">
+                        <div id="img-preview-container" style="display:none; margin-top: 1rem; text-align:center; position: relative;">
+                            <img id="img-preview" src="" alt="Aperçu" style="width: 100%; height: 200px; border-radius: 12px; object-fit: cover; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                            <button type="button" id="remove-img-btn" style="position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.15); color: #ef4444; transition: all 0.2s ease;">
+                                <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-footer" style="flex-shrink: 0; flex-direction: row; justify-content: flex-end; gap: 1rem;">
+                    <button type="button" class="btn btn-outline" id="cancel-product-btn">Annuler</button>
+                    <button type="submit" class="btn btn-primary" id="save-product-btn">Ajouter sur le site</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+
+</html>

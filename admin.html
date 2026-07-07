@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anrif Shop | Administration</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    
+    <!-- Login Screen -->
+    <div id="login-screen" class="screen">
+        <div class="login-card">
+            <h2>ANRIF<span>ADMIN</span></h2>
+            <p>Connectez-vous pour gérer les commandes.</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Identifiant</label>
+                    <input type="text" id="email" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <div id="login-error" class="error-msg"></div>
+                <button type="submit" class="btn btn-primary" id="login-btn">Se connecter</button>
+            </form>
+            <div class="demo-info">
+                <i data-lucide="info"></i>
+                <span>Identifiants d'accès : <strong>admin</strong> / <strong>admin123</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen -->
+    <div id="dashboard-screen" class="screen hidden">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>ANRIF<span>SHOP</span></h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" id="nav-orders" class="active"><i data-lucide="shopping-cart"></i> Commandes</a>
+                <a href="#" id="nav-products"><i data-lucide="package"></i> Produits</a>
+                <a href="#"><i data-lucide="users"></i> Clients (Bientôt)</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn btn-outline"><i data-lucide="log-out"></i> Déconnexion</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Gestion des Commandes</h1>
+                <div class="admin-profile">
+                    <div class="avatar"><i data-lucide="user"></i></div>
+                    <span>Administrateur</span>
+                </div>
+            </header>
+            
+            <div id="view-orders" class="admin-view">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i data-lucide="shopping-bag"></i></div>
+                        <div class="stat-info">
+                            <h3>Nouvelles Commandes</h3>
+                            <p id="stat-new">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success"><i data-lucide="check-circle"></i></div>
+                        <div class="stat-info">
+                            <h3>Commandes Validées</h3>
+                            <p id="stat-validated">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon revenue"><i data-lucide="dollar-sign"></i></div>
+                        <div class="stat-info">
+                            <h3>Chiffre d'Affaires</h3>
+                            <p id="stat-revenue">0 FCFA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="charts-section">
+                    <div class="chart-card">
+                        <h3>Articles les plus vendus</h3>
+                        <canvas id="productsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Fréquence des commandes (Derniers jours)</h3>
+                        <canvas id="visitsChart"></canvas>
+                    </div>
+                    <div class="chart-card" style="grid-column: 1 / -1;">
+                        <h3>Heures de visites (Données simulées)</h3>
+                        <div style="height: 300px; position: relative;">
+                            <canvas id="timeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="orders-section">
+                    <div class="section-header-compact">
+                        <h2>Dernières commandes</h2>
+                        <button id="refresh-btn" class="btn btn-sm"><i data-lucide="refresh-cw"></i> Actualiser</button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Client</th>
+                                    <th>Date</th>
+                                    <th>Montant</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody">
+                                <!-- Les commandes seront injectées ici -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Products -->
+            <div id="view-products" class="admin-view hidden">
+                <div class="section-header-compact">
+                    <h2>Gestion des Produits</h2>
+                    <button id="btn-open-add-product" class="btn btn-primary"><i data-lucide="plus"></i> Ajouter un produit</button>
+                </div>
+                
+                <div class="products-grid" id="admin-products-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                    <!-- Les produits de l'admin seront injectés ici -->
+                </div>
+            </div>
+        </main>
+        
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="order-modal" class="modal">
+        <div class="modal-overlay" id="close-modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Détails de la Commande</h2>
+                <button id="close-modal-btn" class="close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body" id="order-details-body">
+                <!-- Order details injected here -->
+            </div>
+            <div class="modal-footer" id="order-modal-actions">
+                <!-- Action buttons injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-overlay" id="close-product-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ajouter un Nouveau Produit</h2>
+                <button id="close-product-btn" class="close-btn"><i data-lucide="x"></i></button>
+            </div>
+            <form id="add-product-form" style="display: flex; flex-direction: column; flex: 1; overflow: hidden; max-height: calc(90vh - 70px);">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nom du Produit</label>
+                        <input type="text" id="prod-name" required placeholder="Ex: Chemise en Lin">
+                    </div>
+                    <div class="form-group">
+                        <label>Prix (FCFA)</label>
+                        <input type="number" id="prod-price" required placeholder="15000">
+                    </div>
+                    <div class="form-group">
+                        <label>Tailles disponibles</label>
+                        <input type="text" id="prod-size" required placeholder="Ex: S, M, L, XL ou 40, 41, 42">
+                        <small style="color:var(--text-muted); font-size:0.8rem; margin-top:4px; display:block;">Séparez les tailles par des virgules pour permettre au client de choisir.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Catégorie</label>
+                        <select id="prod-category" required style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;">
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                            <option value="Enfant">Enfant</option>
+                            <option value="Accessoires">Accessoires</option>
+                            <option value="Sacs">Sacs</option>
+                            <option value="Chaussures">Chaussures</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>Image du Produit</label>
+                        <div id="image-dropzone" style="position: relative; width: 100%; padding: 2.5rem 1.5rem; border: 2px dashed #CBD5E1; border-radius: 12px; background: #F8FAFC; text-align: center; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <i data-lucide="upload-cloud" style="width: 40px; height: 40px; color: #94A3B8; margin-bottom: 1rem; transition: color 0.3s ease;"></i>
+                            <p style="margin: 0 0 0.5rem 0; font-size: 1rem; color: #334155; font-weight: 500;">Glissez-déposez une image ici</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">ou cliquez pour parcourir les fichiers</p>
+                            <input type="file" id="prod-img-file" accept="image/*" required style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        </div>
+                        <input type="hidden" id="prod-img-base64">
+                        <div id="img-preview-container" style="display:none; margin-top: 1rem; text-align:center; position: relative;">
+                            <img id="img-preview" src="" alt="Aperçu" style="width: 100%; height: 200px; border-radius: 12px; object-fit: cover; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                            <button type="button" id="remove-img-btn" style="position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.15); color: #ef4444; transition: all 0.2s ease;">
+                                <i data-lucide="x" style="width: 18px; height: 18px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="flex-shrink: 0;">
+                    <button type="button" class="btn btn-outline" id="cancel-product-btn">Annuler</button>
+                    <button type="submit" class="btn btn-primary" id="save-product-btn">Ajouter sur le site</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase Compat -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Scripts -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
