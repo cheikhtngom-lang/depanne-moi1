@@ -97,17 +97,15 @@
                 <div class="charts-section">
                     <div class="chart-card">
                         <h3>Articles les plus vendus</h3>
-                        <canvas id="productsChart"></canvas>
+                        <div id="productsChart" style="height: 300px; width: 100%;"></div>
                     </div>
                     <div class="chart-card">
                         <h3>Fréquence des commandes (Derniers jours)</h3>
-                        <canvas id="visitsChart"></canvas>
+                        <div id="visitsChart" style="height: 300px; width: 100%;"></div>
                     </div>
                     <div class="chart-card" style="grid-column: 1 / -1;">
                         <h3>Heures de visites (Données simulées)</h3>
-                        <div style="height: 300px; position: relative;">
-                            <canvas id="timeChart"></canvas>
-                        </div>
+                        <div id="timeChart" style="height: 350px; width: 100%;"></div>
                     </div>
                 </div>
                 
@@ -233,8 +231,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Highcharts via cdnjs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.0/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/11.4.0/highcharts-3d.js"></script>
     
     <!-- Scripts -->
     <script src="js/firebase-config.js"></script>

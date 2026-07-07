@@ -28,37 +28,51 @@
     <header class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="logo">ANRIF<span>SHOP</span></a>
-            <nav class="nav-links">
-                <a href="#collections">Collections</a>
-                <a href="#contact">Contact</a>
-            </nav>
+            
+            <!-- Barre de Recherche Style Jumia -->
+            <div class="search-container">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" class="search-input" placeholder="Cherchez un produit, une marque ou une catégorie...">
+                <button class="btn btn-primary search-btn">Rechercher</button>
+            </div>
             <div class="nav-actions">
                 <div class="auth-dropdown-container">
                     <button class="auth-dropdown-trigger" id="open-auth-btn">
-                        <i data-lucide="user"></i> <span id="auth-btn-text">Se connecter</span> <i data-lucide="chevron-down" style="width: 16px; height: 16px; margin-left: 2px;"></i>
+                        <i data-lucide="user"></i> <span id="auth-btn-text">Se connecter</span> <i
+                            data-lucide="chevron-down" style="width: 16px; height: 16px; margin-left: 2px;"></i>
                     </button>
-                    
+
                     <div class="auth-dropdown-menu">
                         <div id="auth-menu-logged-out">
-                            <button class="btn btn-primary" id="menu-login-btn" style="width: 100%; padding: 0.6rem; font-size: 0.95rem; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(214, 64, 124, 0.3);">Se connecter</button>
+                            <button class="btn btn-primary" id="menu-login-btn"
+                                style="width: 100%; padding: 0.6rem; font-size: 0.95rem; margin-bottom: 0.5rem; box-shadow: 0 4px 10px rgba(214, 64, 124, 0.3);">Se
+                                connecter</button>
+                            <button class="btn btn-outline" id="menu-signup-btn"
+                                style="width: 100%; padding: 0.6rem; font-size: 0.95rem; margin-bottom: 0.5rem;">Créer un compte</button>
                             <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
                             <div class="auth-menu-links">
-                                <a href="#"><i data-lucide="user"></i> Votre compte</a>
+                                <a href="#" onclick="document.getElementById('auth-modal').classList.add('open'); return false;"><i data-lucide="user"></i> Votre compte</a>
                                 <a href="#"><i data-lucide="box"></i> Vos commandes</a>
                                 <a href="#"><i data-lucide="heart"></i> Favoris</a>
                             </div>
                         </div>
-                        
+
                         <div id="auth-menu-logged-in" style="display: none;">
-                            <p style="margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; color: var(--text-main);">Bonjour, <span id="menu-user-name" style="color: var(--accent);"></span></p>
+                            <p
+                                style="margin-bottom: 0.5rem; font-weight: 500; font-size: 0.95rem; color: var(--text-main);">
+                                Bonjour, <span id="menu-user-name" style="color: var(--accent);"></span></p>
                             <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
                             <div class="auth-menu-links">
-                                <a href="#"><i data-lucide="user"></i> Votre compte</a>
+                                <a href="#" id="menu-profile-btn"><i data-lucide="user"></i> Votre compte</a>
                                 <a href="#"><i data-lucide="box"></i> Vos commandes</a>
                                 <a href="#"><i data-lucide="heart"></i> Favoris</a>
                             </div>
                             <hr style="border: 0; border-top: 1px solid var(--border); margin: 0.8rem 0;">
-                            <button class="btn btn-outline" id="menu-logout-btn" style="width: 100%; padding: 0.5rem; font-size: 0.9rem; color: var(--danger); border-color: var(--danger);"><i data-lucide="log-out" style="width: 16px; height: 16px; margin-right: 5px; vertical-align: middle;"></i> Déconnexion</button>
+                            <button class="btn btn-outline" id="menu-logout-btn"
+                                style="width: 100%; padding: 0.5rem; font-size: 0.9rem; color: var(--danger); border-color: var(--danger);"><i
+                                    data-lucide="log-out"
+                                    style="width: 16px; height: 16px; margin-right: 5px; vertical-align: middle;"></i>
+                                Déconnexion</button>
                         </div>
                     </div>
                 </div>
@@ -77,26 +91,36 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section id="hero-section" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="badge fade-up">Nouvelle Arrivage</span>
-            <h1 class="hero-title fade-up stagger-1">L'Élégance de la <br><span>Friperie de Luxe</span></h1>
-            <p class="hero-subtitle fade-up stagger-2">Fin de série pour Homme, Femme et Enfant à Dakar. Découvrez des
-                pièces uniques soigneusement sélectionnées.</p>
-            <div class="hero-actions fade-up stagger-3">
-                <a href="#produits" class="btn btn-primary">Acheter Maintenant</a>
-                <a href="#contact" class="btn btn-secondary">Nous Contacter</a>
+    <!-- Main E-commerce Layout (Style Jumia) -->
+    <section id="hero-section" class="main-ecommerce-layout">
+        <div class="container layout-container">
+            
+            <!-- Left Banner Slider (Main Content) -->
+            <div class="main-banner">
+                <div class="hero-bg"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <span class="badge fade-up">Nouvelle Arrivage</span>
+                    <h1 class="hero-title fade-up stagger-1">L'Élégance de la <br><span>Friperie de Luxe</span></h1>
+                    <p class="hero-subtitle fade-up stagger-2">Fin de série pour Homme, Femme et Enfant à Dakar.</p>
+                    <div class="hero-actions fade-up stagger-3">
+                        <a href="#produits" class="btn btn-primary">Acheter Maintenant</a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="scroll-indicator">
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-            <p>Défiler</p>
+            <!-- Right Categories Sidebar -->
+            <aside class="category-sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="filter-category" data-category="Homme"><i data-lucide="user"></i> Homme</a></li>
+                    <li><a href="#" class="filter-category" data-category="Femme"><i data-lucide="users"></i> Femme</a></li>
+                    <li><a href="#" class="filter-category" data-category="Enfant"><i data-lucide="baby"></i> Enfant</a></li>
+                    <li><a href="#" class="filter-category" data-category="Accessoires"><i data-lucide="glasses"></i> Accessoires</a></li>
+                    <li><a href="#" class="filter-category" data-category="Sacs"><i data-lucide="briefcase"></i> Sacs</a></li>
+                    <li><a href="#" class="filter-category" data-category="Chaussures"><i data-lucide="footprints"></i> Chaussures</a></li>
+                </ul>
+            </aside>
+
         </div>
     </section>
 
@@ -107,42 +131,52 @@
                 <h2>Nos produits en vogue</h2>
                 <p>Découvrez les looks les plus convoités de la saison.</p>
             </div>
-            
+
             <div class="bento-grid">
                 <!-- 1. Robe Classe (Large) -->
-                <div class="bento-item bento-large fade-up" style="background-image: url('https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                <div class="bento-item bento-large fade-up"
+                    style="background-image: url('https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=80');"
+                    onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
                     <div class="bento-content">
                         <h3>Robe Classe</h3>
                         <span>Découvrir la pièce</span>
                     </div>
                 </div>
-                
+
                 <!-- 2. Pantalon 1 -->
-                <div class="bento-item fade-up stagger-1" style="background-image: url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                <div class="bento-item fade-up stagger-1"
+                    style="background-image: url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=500&q=80');"
+                    onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
                     <div class="bento-content">
                         <h3>Pantalon Élégant</h3>
                         <span>Voir</span>
                     </div>
                 </div>
-                
+
                 <!-- 3. Haut Grande Dame -->
-                <div class="bento-item fade-up stagger-2" style="background-image: url('https://images.unsplash.com/photo-1588117305388-c2631a279f82?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                <div class="bento-item fade-up stagger-2"
+                    style="background-image: url('https://images.unsplash.com/photo-1588117305388-c2631a279f82?auto=format&fit=crop&w=500&q=80');"
+                    onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
                     <div class="bento-content">
                         <h3>Haut Grande Dame</h3>
                         <span>Voir</span>
                     </div>
                 </div>
-                
+
                 <!-- 4. Chaussures Villes -->
-                <div class="bento-item fade-up stagger-3" style="background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                <div class="bento-item fade-up stagger-3"
+                    style="background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=500&q=80');"
+                    onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
                     <div class="bento-content">
                         <h3>Chaussures Villes</h3>
                         <span>Voir</span>
                     </div>
                 </div>
-                
+
                 <!-- 5. Pantalon 2 -->
-                <div class="bento-item fade-up stagger-4" style="background-image: url('https://images.unsplash.com/photo-1584865288642-42078afe6942?auto=format&fit=crop&w=500&q=80');" onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
+                <div class="bento-item fade-up stagger-4"
+                    style="background-image: url('https://images.unsplash.com/photo-1584865288642-42078afe6942?auto=format&fit=crop&w=500&q=80');"
+                    onclick="document.getElementById('produits').scrollIntoView({behavior: 'smooth'})">
                     <div class="bento-content">
                         <h3>Pantalon Chic</h3>
                         <span>Voir</span>
@@ -225,7 +259,8 @@
     </section>
 
     <!-- Featured Products Section -->
-    <section id="featured-produits" class="products-section" style="background-color: var(--white); padding-bottom: 2rem;">
+    <section id="featured-produits" class="products-section"
+        style="background-color: var(--white); padding-bottom: 2rem;">
         <div class="container">
             <div class="section-header fade-up">
                 <h2>Nos produits à la une</h2>
@@ -262,6 +297,14 @@
                 <button class="close-cart" id="close-auth-btn"><i data-lucide="x"></i></button>
             </div>
             <form id="auth-form" class="checkout-form" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label id="auth-email-label">Email</label>
+                    <input type="email" id="auth-email" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" id="auth-password" required placeholder="Votre mot de passe">
+                </div>
                 <div id="auth-signup-fields" style="display:none;">
                     <div class="form-group">
                         <label>Prénom et Nom</label>
@@ -275,15 +318,6 @@
                         <label>Adresse par défaut</label>
                         <textarea id="auth-address" placeholder="Quartier, Ville..." rows="2"></textarea>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label id="auth-email-label">Email ou Prénom et Nom</label>
-                    <input type="text" id="auth-email" required placeholder="votre@email.com ou Alioune Fall">
-                </div>
-                <div class="form-group">
-                    <label>Mot de passe</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••">
                 </div>
                 <p id="auth-error" style="color:#EE5D50; font-size:0.9rem; margin-bottom:1rem;"></p>
                 <button type="submit" class="btn btn-primary btn-large w-100" id="auth-submit-btn">Se connecter</button>
@@ -303,17 +337,29 @@
                 <h2>Notifications</h2>
                 <button class="close-cart" id="close-notif-btn"><i data-lucide="x"></i></button>
             </div>
-            <div class="cart-items" id="notif-items" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+            <div class="cart-items" id="notif-items"
+                style="padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
                 <!-- Dummy notifications -->
-                <div class="notif-item" style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
-                    <h4 style="margin-bottom: 0.2rem; color: var(--primary); font-size: 1rem;">Nouvelle collection !</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Découvrez nos nouveaux arrivages de sacs de luxe. Venez vite en boutique !</p>
-                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i data-lucide="clock" style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il y a 2 heures</span>
+                <div class="notif-item"
+                    style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                    <h4 style="margin-bottom: 0.2rem; color: var(--primary); font-size: 1rem;">Nouvelle collection !
+                    </h4>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Découvrez nos nouveaux arrivages de sacs de
+                        luxe. Venez vite en boutique !</p>
+                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i
+                            data-lucide="clock"
+                            style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il
+                        y a 2 heures</span>
                 </div>
-                <div class="notif-item" style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <div class="notif-item"
+                    style="padding: 1rem; border: 1px solid var(--secondary); border-radius: 8px; background: var(--white); box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
                     <h4 style="margin-bottom: 0.2rem; color: var(--primary); font-size: 1rem;">Promo Spéciale</h4>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Profitez de -20% sur toutes les chaussures femme ce week-end avec le code ANRIF20.</p>
-                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i data-lucide="clock" style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il y a 1 jour</span>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Profitez de -20% sur toutes les chaussures
+                        femme ce week-end avec le code ANRIF20.</p>
+                    <span style="font-size: 0.75rem; color: #999; margin-top: 0.5rem; display: block;"><i
+                            data-lucide="clock"
+                            style="width:12px; height:12px; display:inline; vertical-align:middle; margin-right:4px;"></i>Il
+                        y a 1 jour</span>
                 </div>
             </div>
             <div class="cart-footer">
@@ -387,7 +433,8 @@
                             <input type="radio" name="payment-method" value="cash" required>
                             <div
                                 style="width:30px; height:30px; background:#F4F7FE; border-radius:6px; display:flex; align-items:center; justify-content:center; color:var(--text-main);">
-                                <i data-lucide="banknote" style="width:16px;"></i></div> À la livraison
+                                <i data-lucide="banknote" style="width:16px;"></i>
+                            </div> À la livraison
                         </label>
                     </div>
                 </div>
@@ -490,19 +537,42 @@
 
             <div class="footer-social">
                 <h3>Suivez-nous</h3>
-                <div class="social-icons">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i
-                            data-lucide="instagram"></i></a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i
-                            data-lucide="facebook"></i></a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i
-                            data-lucide="twitter"></i></a>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="social-icons" style="gap: 0;">
+                            <a href="https://instagram.com/Noushngom" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                                <i data-lucide="instagram"></i>
+                            </a>
+                        </div>
+                        <a href="https://instagram.com/Noushngom" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); text-decoration: none; font-size: 1rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-light)'">@Noushngom</a>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="social-icons" style="gap: 0;">
+                            <a href="https://facebook.com/Noushbeye" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                                <i data-lucide="facebook"></i>
+                            </a>
+                        </div>
+                        <a href="https://facebook.com/Noushbeye" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); text-decoration: none; font-size: 1rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-light)'">@Noushbeye</a>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div class="social-icons" style="gap: 0;">
+                            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.12-3.44-3.17-3.64-5.41-.21-2.34.82-4.7 2.65-6.04 1.52-1.12 3.49-1.51 5.35-1.12.39.09.78.22 1.15.38v4.11c-.51-.15-1.04-.2-1.57-.14-.99.1-1.85.73-2.3 1.6-.46.91-.4 2.01.12 2.89.53.9 1.52 1.45 2.56 1.45 1.1 0 2.11-.62 2.59-1.59.3-.61.41-1.3.4-1.99V0h-3.61c-.01 0 .02.02.02.02z"/></svg>
+                            </a>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" style="color: var(--text-light); text-decoration: none; font-size: 1rem; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-light)'">@BE'NET</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2026 Anrif Shop. Tous droits réservés. <span style="margin-left: 10px; opacity: 0.5; cursor: pointer;" id="toggle-admin-btn" title="Activer le mode Admin"><i data-lucide="settings" style="width: 14px; height: 14px; vertical-align: middle;"></i> Admin</span></p>
+            <p>&copy; 2026 Anrif Shop. Tous droits réservés. <span
+                    style="margin-left: 10px; opacity: 0.5; cursor: pointer;" id="toggle-admin-btn"
+                    title="Activer le mode Admin"><i data-lucide="settings"
+                        style="width: 14px; height: 14px; vertical-align: middle;"></i> Admin</span></p>
         </div>
     </footer>
 
@@ -514,7 +584,8 @@
                 <h2>Ajouter un Nouveau Produit</h2>
                 <button id="close-product-btn" class="close-cart"><i data-lucide="x"></i></button>
             </div>
-            <form id="add-product-form" style="display: flex; flex-direction: column; flex: 1; overflow: hidden; max-height: calc(90vh - 70px);">
+            <form id="add-product-form"
+                style="display: flex; flex-direction: column; flex: 1; overflow: hidden; max-height: calc(90vh - 70px);">
                 <div class="cart-items" style="padding: 1.5rem; overflow-y: auto; flex: 1;">
                     <div class="form-group">
                         <label>Nom du Produit</label>
@@ -527,11 +598,13 @@
                     <div class="form-group">
                         <label>Tailles disponibles</label>
                         <input type="text" id="prod-size" required placeholder="Ex: S, M, L, XL ou 40, 41, 42">
-                        <small style="color:var(--text-muted); font-size:0.8rem; margin-top:4px; display:block;">Séparez les tailles par des virgules pour permettre au client de choisir.</small>
+                        <small style="color:var(--text-muted); font-size:0.8rem; margin-top:4px; display:block;">Séparez
+                            les tailles par des virgules pour permettre au client de choisir.</small>
                     </div>
                     <div class="form-group">
                         <label>Catégorie</label>
-                        <select id="prod-category" required style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;">
+                        <select id="prod-category" required
+                            style="width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s;">
                             <option value="Homme">Homme</option>
                             <option value="Femme">Femme</option>
                             <option value="Enfant">Enfant</option>
@@ -542,25 +615,69 @@
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label>Image du Produit</label>
-                        <div id="image-dropzone" style="position: relative; width: 100%; padding: 2.5rem 1.5rem; border: 2px dashed #CBD5E1; border-radius: 12px; background: #F8FAFC; text-align: center; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                            <i data-lucide="upload-cloud" style="width: 40px; height: 40px; color: #94A3B8; margin-bottom: 1rem; transition: color 0.3s ease;"></i>
-                            <p style="margin: 0 0 0.5rem 0; font-size: 1rem; color: #334155; font-weight: 500;">Glissez-déposez une image ici</p>
-                            <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">ou cliquez pour parcourir les fichiers</p>
-                            <input type="file" id="prod-img-file" accept="image/*" required style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
+                        <div id="image-dropzone"
+                            style="position: relative; width: 100%; padding: 2.5rem 1.5rem; border: 2px dashed #CBD5E1; border-radius: 12px; background: #F8FAFC; text-align: center; cursor: pointer; transition: all 0.3s ease; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <i data-lucide="upload-cloud"
+                                style="width: 40px; height: 40px; color: #94A3B8; margin-bottom: 1rem; transition: color 0.3s ease;"></i>
+                            <p style="margin: 0 0 0.5rem 0; font-size: 1rem; color: #334155; font-weight: 500;">
+                                Glissez-déposez une image ici</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: #94A3B8;">ou cliquez pour parcourir les
+                                fichiers</p>
+                            <input type="file" id="prod-img-file" accept="image/*" required
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;">
                         </div>
                         <input type="hidden" id="prod-img-base64">
-                        <div id="img-preview-container" style="display:none; margin-top: 1rem; text-align:center; position: relative;">
-                            <img id="img-preview" src="" alt="Aperçu" style="width: 100%; height: 200px; border-radius: 12px; object-fit: cover; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-                            <button type="button" id="remove-img-btn" style="position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.15); color: #ef4444; transition: all 0.2s ease;">
+                        <div id="img-preview-container"
+                            style="display:none; margin-top: 1rem; text-align:center; position: relative;">
+                            <img id="img-preview" src="" alt="Aperçu"
+                                style="width: 100%; height: 200px; border-radius: 12px; object-fit: cover; border: 1px solid #E2E8F0; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                            <button type="button" id="remove-img-btn"
+                                style="position: absolute; top: 12px; right: 12px; background: rgba(255, 255, 255, 0.95); border: none; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.15); color: #ef4444; transition: all 0.2s ease;">
                                 <i data-lucide="x" style="width: 18px; height: 18px;"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-                <div class="cart-footer" style="flex-shrink: 0; flex-direction: row; justify-content: flex-end; gap: 1rem;">
+                <div class="cart-footer"
+                    style="flex-shrink: 0; flex-direction: row; justify-content: flex-end; gap: 1rem;">
                     <button type="button" class="btn btn-outline" id="cancel-product-btn">Annuler</button>
                     <button type="submit" class="btn btn-primary" id="save-product-btn">Ajouter sur le site</button>
                 </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="checkout-modal" id="profile-modal">
+        <div class="cart-modal-overlay" id="profile-overlay"></div>
+        <div class="checkout-modal-content" style="max-width: 400px; padding: 2rem; border-radius: 12px;">
+            <div class="cart-header" style="border:none; padding-bottom: 0;">
+                <h2>Mon Compte</h2>
+                <button class="close-cart" id="close-profile-btn"><i data-lucide="x"></i></button>
+            </div>
+            <form id="profile-form" class="checkout-form" style="margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label>Prénom et Nom</label>
+                    <input type="text" id="prof-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="prof-email" required disabled style="background-color: #f0f0f0; cursor: not-allowed; color: #666;">
+                    <small style="color:var(--text-muted); font-size:0.8rem;">L'email ne peut pas être modifié.</small>
+                </div>
+                <div class="form-group">
+                    <label>Téléphone</label>
+                    <input type="tel" id="prof-phone" required>
+                </div>
+                <div class="form-group">
+                    <label>Adresse par défaut</label>
+                    <textarea id="prof-address" rows="2" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Nouveau Mot de passe (optionnel)</label>
+                    <input type="password" id="prof-password" placeholder="Laissez vide pour conserver l'actuel">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large w-100" id="prof-submit-btn" style="margin-top: 1rem;">Enregistrer les modifications</button>
             </form>
         </div>
     </div>

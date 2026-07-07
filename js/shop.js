@@ -75,25 +75,21 @@ async function fetchProducts() {
     } else {
         // Mode démo
         const defaultDemos = [
-            { id: "p1", name: "Veste Blazer Noir", price: 25000, size: "M", category: "Homme", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=60" },
-            { id: "p2", name: "Robe d'Été Fleurie", price: 15000, size: "S", category: "Femme", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop&q=60" },
-            { id: "p3", name: "Chemise Blanche Premium", price: 12000, size: "L", category: "Homme", img: "https://images.unsplash.com/photo-1596755094514-f87e32f85e98?w=500&auto=format&fit=crop&q=60" },
-            { id: "p4", name: "Sac en Cuir Vintage", price: 35000, size: "Unique", category: "Sacs", img: "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&auto=format&fit=crop&q=60" },
-            { id: "p5", name: "T-Shirt Basique Homme", price: 2500, size: "M", category: "Homme", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop&q=60" },
-            { id: "p6", name: "Polo Manches Courtes", price: 3500, size: "L", category: "Homme", img: "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=500&auto=format&fit=crop&q=60" },
-            { id: "p7", name: "Chemise Décontractée", price: 4500, size: "XL", category: "Homme", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop&q=60" },
-            { id: "p8", name: "Pantalon en Toile", price: 5500, size: "42", category: "Homme", img: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=500&auto=format&fit=crop&q=60" },
-            { id: "p9", name: "Short d'Été Plage", price: 2000, size: "M", category: "Homme", img: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=500&auto=format&fit=crop&q=60" },
-            { id: "p10", name: "Pantalon Kaki Boss Homme", price: 12000, size: "XL, XXL", category: "Homme", img: "./solide-kaki-pantalon-noir-gris-boss-homme-5-300x300.jpg" },
-            { id: "p11", name: "Article Homme Classique", price: 6000, size: "XL, XXL", category: "Homme", img: "./1.jpg" }
+            { id: "p_sac1", name: "Sac à Main Luxe Femme", price: 45000, size: "Unique", category: "Sacs", img: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=500&auto=format&fit=crop&q=60" },
+            { id: "p_pant1", name: "Pantalon en Jean Enfant", price: 8000, size: "6 ans, 8 ans, 10 ans", category: "Enfant", img: "https://images.unsplash.com/photo-1519241047957-be31d7379a5d?w=500&auto=format&fit=crop&q=60" },
+            { id: "p_chem1", name: "Chemise Slim Fit Homme", price: 15000, size: "M, L, XL", category: "Homme", img: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=500&auto=format&fit=crop&q=60" },
+            { id: "p_chem2", name: "Chemise Blanche Classique", price: 12000, size: "S, M, L", category: "Homme", img: "https://images.unsplash.com/photo-1596755094514-f87e32f85e98?w=500&auto=format&fit=crop&q=60" },
+            { id: "p1", name: "Veste Blazer Noir", price: 25000, size: "M, L", category: "Homme", img: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500&auto=format&fit=crop&q=60" },
+            { id: "p2", name: "Robe d'Été Fleurie", price: 15000, size: "S, M", category: "Femme", img: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&auto=format&fit=crop&q=60" }
         ];
 
-        const saved = localStorage.getItem('demoProducts');
+        // On utilise _v2 pour forcer le rafraîchissement des produits chez le client
+        const saved = localStorage.getItem('demoProducts_v2');
         if (saved) {
             products = JSON.parse(saved);
         } else {
             products = defaultDemos;
-            localStorage.setItem('demoProducts', JSON.stringify(products));
+            localStorage.setItem('demoProducts_v2', JSON.stringify(products));
         }
         renderFeaturedProducts();
         renderProducts();
@@ -327,6 +323,13 @@ function setupCategoryFilters() {
 }
 
 function addToCart(productId, selectedSize) {
+    // Vérifier si l'utilisateur est connecté
+    if (!currentUser) {
+        alert("Vous devez être connecté pour ajouter des articles au panier.");
+        document.getElementById('auth-modal').classList.add('open');
+        return;
+    }
+
     const product = products.find(p => p.id === productId);
     
     const existing = cart.find(item => item.id === productId && item.selectedSize === selectedSize);
@@ -410,10 +413,36 @@ function setupModals() {
     const checkoutModal = document.getElementById('checkout-modal');
     const authModal = document.getElementById('auth-modal');
     
+    function setAuthMode(signup) {
+        isSignupMode = signup;
+        document.getElementById('auth-title').textContent = isSignupMode ? "Inscription" : "Connexion";
+        document.getElementById('auth-submit-btn').textContent = isSignupMode ? "S'inscrire" : "Se connecter";
+        document.getElementById('auth-signup-fields').style.display = isSignupMode ? "block" : "none";
+        document.getElementById('auth-email-label').textContent = isSignupMode ? "Email" : "Email, Téléphone ou Nom";
+        document.getElementById('auth-email').placeholder = isSignupMode ? "votre@email.com" : "Email, n° de téléphone ou prénom et nom";
+        document.getElementById('auth-email').type = isSignupMode ? "email" : "text";
+        document.getElementById('auth-name').required = isSignupMode;
+        document.getElementById('auth-phone').required = isSignupMode;
+        document.getElementById('auth-address').required = isSignupMode;
+        const toggleBtn = document.getElementById('toggle-auth-mode');
+        if (toggleBtn) {
+            toggleBtn.textContent = isSignupMode ? "Déjà un compte ? Se connecter" : "Pas encore de compte ? S'inscrire";
+        }
+    }
+
     // --- Auth Modal & Dropdown ---
     const menuLoginBtn = document.getElementById('menu-login-btn');
     if (menuLoginBtn) {
         menuLoginBtn.addEventListener('click', () => {
+            setAuthMode(false);
+            authModal.classList.add('open');
+        });
+    }
+
+    const menuSignupBtn = document.getElementById('menu-signup-btn');
+    if (menuSignupBtn) {
+        menuSignupBtn.addEventListener('click', () => {
+            setAuthMode(true);
             authModal.classList.add('open');
         });
     }
@@ -436,61 +465,70 @@ function setupModals() {
     if (authToggleBtn) {
         authToggleBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            isSignupMode = !isSignupMode;
-            document.getElementById('auth-title').textContent = isSignupMode ? "Inscription" : "Connexion";
-            document.getElementById('auth-submit-btn').textContent = isSignupMode ? "S'inscrire" : "Se connecter";
-            document.getElementById('auth-signup-fields').style.display = isSignupMode ? "block" : "none";
-            document.getElementById('auth-email-label').textContent = isSignupMode ? "Email" : "Email ou Prénom et Nom";
-            document.getElementById('auth-email').placeholder = isSignupMode ? "votre@email.com" : "votre@email.com ou Alioune Fall";
-            document.getElementById('auth-email').type = isSignupMode ? "email" : "text";
-            document.getElementById('auth-name').required = isSignupMode;
-            document.getElementById('auth-phone').required = isSignupMode;
-            document.getElementById('auth-address').required = isSignupMode;
-            e.currentTarget.textContent = isSignupMode ? "Déjà un compte ? Se connecter" : "Pas encore de compte ? S'inscrire";
+            setAuthMode(!isSignupMode);
         });
     }
     
+
     document.getElementById('auth-form').addEventListener('submit', (e) => {
         e.preventDefault();
         const loginIdentifier = document.getElementById('auth-email').value.trim();
+        const password = document.getElementById('auth-password').value.trim();
         const name = document.getElementById('auth-name').value.trim();
         const phone = document.getElementById('auth-phone').value.trim();
         const address = document.getElementById('auth-address').value.trim();
+        const errorEl = document.getElementById('auth-error');
+        
+        if (errorEl) errorEl.textContent = '';
         
         let userToSave = null;
         
         if (isSignupMode) {
             userToSave = { 
                 email: loginIdentifier,
+                password: password,
                 name: name,
                 phone: phone,
                 address: address
             };
             // Sauvegarder dans notre "fausse BDD" locale
-            localStorage.setItem('demoUserDB_' + loginIdentifier, JSON.stringify(userToSave));
+            localStorage.setItem('demoUserDB_' + loginIdentifier.toLowerCase(), JSON.stringify(userToSave));
         } else {
-            // Mode connexion : recherche par email ou nom
+            // Mode connexion : recherche par email, nom ou téléphone
             let foundUser = null;
+            let foundKey = null;
+            const searchId = loginIdentifier.toLowerCase();
+            
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i);
                 if (key.startsWith('demoUserDB_')) {
                     const user = JSON.parse(localStorage.getItem(key));
-                    if (user.email.toLowerCase() === loginIdentifier.toLowerCase() || 
-                        (user.name && user.name.toLowerCase() === loginIdentifier.toLowerCase())) {
+                    const uEmail = user.email ? user.email.toLowerCase() : '';
+                    const uName = user.name ? user.name.toLowerCase() : '';
+                    const uPhone = user.phone ? user.phone.replace(/\s+/g, '') : '';
+                    const sPhone = searchId.replace(/\s+/g, '');
+                    
+                    if (uEmail === searchId || uName === searchId || (uPhone && sPhone && uPhone === sPhone)) {
                         foundUser = user;
+                        foundKey = key;
                         break;
                     }
                 }
             }
             
             if (foundUser) {
+                if (foundUser.password && foundUser.password !== password) {
+                    if (errorEl) errorEl.textContent = "Mot de passe incorrect.";
+                    return;
+                } else if (!foundUser.password) {
+                    // Pour les anciens comptes sans mot de passe, on l'ajoute
+                    foundUser.password = password;
+                    localStorage.setItem(foundKey, JSON.stringify(foundUser));
+                }
                 userToSave = foundUser;
             } else {
-                // Compte inexistant localement, création temporaire pour la démo
-                userToSave = { 
-                    email: loginIdentifier.includes('@') ? loginIdentifier : 'client@anrif.com', 
-                    name: loginIdentifier.includes('@') ? loginIdentifier.split('@')[0] : loginIdentifier 
-                };
+                if (errorEl) errorEl.textContent = "Compte introuvable. Veuillez vérifier vos informations ou vous inscrire.";
+                return;
             }
         }
         
@@ -510,6 +548,63 @@ function setupModals() {
         currentUser = JSON.parse(savedUser);
         updateAuthUI();
         fillCheckoutFromUser();
+    }
+
+    // --- Profile Modal ---
+    const profileModal = document.getElementById('profile-modal');
+    const menuProfileBtn = document.getElementById('menu-profile-btn');
+    
+    if (menuProfileBtn) {
+        menuProfileBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!currentUser) return;
+            
+            // Fill form
+            document.getElementById('prof-name').value = currentUser.name || '';
+            document.getElementById('prof-email').value = currentUser.email || '';
+            document.getElementById('prof-phone').value = currentUser.phone || '';
+            document.getElementById('prof-address').value = currentUser.address || '';
+            document.getElementById('prof-password').value = ''; // Do not pre-fill password
+            
+            profileModal.classList.add('open');
+        });
+    }
+
+    const closeProfileBtn = document.getElementById('close-profile-btn');
+    if (closeProfileBtn) closeProfileBtn.addEventListener('click', () => profileModal.classList.remove('open'));
+    
+    const profileOverlay = document.getElementById('profile-overlay');
+    if (profileOverlay) profileOverlay.addEventListener('click', () => profileModal.classList.remove('open'));
+
+    const profileForm = document.getElementById('profile-form');
+    if (profileForm) {
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) return;
+            
+            const newName = document.getElementById('prof-name').value.trim();
+            const newPhone = document.getElementById('prof-phone').value.trim();
+            const newAddress = document.getElementById('prof-address').value.trim();
+            const newPassword = document.getElementById('prof-password').value.trim();
+            
+            currentUser.name = newName;
+            currentUser.phone = newPhone;
+            currentUser.address = newAddress;
+            if (newPassword) {
+                currentUser.password = newPassword;
+            }
+            
+            // Update local storage
+            localStorage.setItem('demoUserDB_' + currentUser.email, JSON.stringify(currentUser));
+            localStorage.setItem('clientUser', JSON.stringify(currentUser));
+            
+            updateAuthUI();
+            fillCheckoutFromUser();
+            
+            alert('Vos informations ont été mises à jour avec succès.');
+            profileModal.classList.remove('open');
+        });
     }
 
     
@@ -719,6 +814,25 @@ function fillCheckoutFromUser() {
     if (addressInput && currentUser.address) addressInput.value = currentUser.address;
 }
 
+// ==========================================
+// AUTHENTICATION & UI
+// ==========================================
+
+function togglePrivateContent() {
+    const isLogged = !!currentUser;
+    const sidebar = document.querySelector('.category-sidebar');
+    const trendingSection = document.getElementById('trending-section');
+    const produitsSection = document.getElementById('produits');
+    const categoriesSection = document.getElementById('categories-section');
+    const layoutContainer = document.querySelector('.layout-container');
+
+    if (sidebar) sidebar.style.display = isLogged ? '' : 'none';
+    if (trendingSection) trendingSection.style.display = isLogged ? '' : 'none';
+    if (produitsSection) produitsSection.style.display = isLogged ? '' : 'none';
+    if (categoriesSection) categoriesSection.style.display = isLogged ? '' : 'none';
+    if (layoutContainer) layoutContainer.style.gridTemplateColumns = isLogged ? '' : '1fr';
+}
+
 function updateAuthUI() {
     const authBtnText = document.getElementById('auth-btn-text');
     const loggedOutMenu = document.getElementById('auth-menu-logged-out');
@@ -737,6 +851,12 @@ function updateAuthUI() {
         loggedOutMenu.style.display = 'block';
         loggedInMenu.style.display = 'none';
     }
+    
+    // Always sync the private content visibility
+    if (typeof togglePrivateContent === 'function') {
+        togglePrivateContent();
+    }
+    
     lucide.createIcons();
 }
 

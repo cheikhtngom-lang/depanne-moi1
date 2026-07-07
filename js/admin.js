@@ -174,17 +174,16 @@ function updateStats() {
     renderCharts();
 }
 
-let productsChartInstance = null;
-let ordersChartInstance = null;
-let timeChartInstance = null;
-
 function renderCharts() {
-    if (typeof Chart === 'undefined') return;
+    if (typeof Highcharts === 'undefined') {
+        console.error("Highcharts is not loaded.");
+        return;
+    }
 
     // 1. Articles les plus vendus
     const productCounts = {};
     currentOrders.forEach(order => {
-        if (order.status !== 'Annulée') {
+        if (order.status !== 'Annulée' && order.items) {
             order.items.forEach(item => {
                 if (productCounts[item.name]) {
                     productCounts[item.name] += item.quantity;
@@ -195,30 +194,36 @@ function renderCharts() {
         }
     });
 
-    const productLabels = Object.keys(productCounts);
-    const productData = Object.values(productCounts);
+    const productData = Object.entries(productCounts).map(([name, count]) => ({name, y: count}));
+    if (productData.length === 0) productData.push({name: 'Aucune donnée', y: 1});
 
-    const ctxProducts = document.getElementById('productsChart');
-    if (ctxProducts) {
-        if (productsChartInstance) productsChartInstance.destroy();
-        productsChartInstance = new Chart(ctxProducts.getContext('2d'), {
-            type: 'doughnut',
-            data: {
-                labels: productLabels.length ? productLabels : ['Aucune donnée'],
-                datasets: [{
-                    data: productData.length ? productData : [1],
-                    backgroundColor: ['#E63946', '#457B9D', '#1D3557', '#A8DADC', '#F1FAEE'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { position: 'bottom' } }
-            }
-        });
+    try {
+        if (document.getElementById('productsChart')) {
+            Highcharts.chart('productsChart', {
+                chart: {
+                    type: 'pie',
+                    options3d: { enabled: true, alpha: 45, beta: 0 },
+                    backgroundColor: 'transparent',
+                    style: { fontFamily: 'Inter, sans-serif' }
+                },
+                title: { text: '' },
+                tooltip: { pointFormat: '{series.name}: <b>{point.y}</b>' },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true, cursor: 'pointer', depth: 35,
+                        dataLabels: { enabled: true, format: '{point.name}' },
+                        colors: ['#D6407C', '#2B3674', '#05CD99', '#FFCE20', '#EE5D50']
+                    }
+                },
+                series: [{ type: 'pie', name: 'Ventes', data: productData }],
+                credits: { enabled: false }
+            });
+        }
+    } catch (e) {
+        console.error("Erreur graphique Pie:", e);
     }
 
-    // 2. Commandes des 7 derniers jours (À la place des visites pour avoir des données réelles)
+    // 2. Commandes des 7 derniers jours
     const last7Days = [];
     const ordersPerDay = [];
     
@@ -235,56 +240,64 @@ function renderCharts() {
         ordersPerDay.push(count);
     }
 
-    const ctxVisits = document.getElementById('visitsChart');
-    if (ctxVisits) {
-        if (ordersChartInstance) ordersChartInstance.destroy();
-        ordersChartInstance = new Chart(ctxVisits.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: last7Days,
-                datasets: [{
-                    label: 'Commandes par jour',
-                    data: ordersPerDay,
-                    backgroundColor: '#E63946',
-                    borderRadius: 5
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
-            }
-        });
+    try {
+        if (document.getElementById('visitsChart')) {
+            Highcharts.chart('visitsChart', {
+                chart: {
+                    type: 'column',
+                    options3d: { enabled: true, alpha: 15, beta: 15, depth: 50, viewDistance: 25 },
+                    backgroundColor: 'transparent',
+                    style: { fontFamily: 'Inter, sans-serif' }
+                },
+                title: { text: '' },
+                xAxis: { categories: last7Days, labels: { style: { color: '#2B3674' } } },
+                yAxis: { title: { text: '' }, gridLineColor: 'rgba(224, 229, 242, 0.5)' },
+                plotOptions: {
+                    column: { depth: 25, color: '#D6407C' }
+                },
+                series: [{ name: 'Commandes', data: ordersPerDay }],
+                credits: { enabled: false }
+            });
+        }
+    } catch (e) {
+        console.error("Erreur graphique Column:", e);
     }
 
-    // 3. Heures de visites (Diagramme en ligne - Simulé pour l'exemple)
+    // 3. Heures de visites
     const hours = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
     const mockVisits = [12, 35, 89, 45, 60, 112, 140, 55];
 
-    const ctxTime = document.getElementById('timeChart');
-    if (ctxTime) {
-        if (timeChartInstance) timeChartInstance.destroy();
-        timeChartInstance = new Chart(ctxTime.getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: hours,
-                datasets: [{
-                    label: 'Visiteurs (Moyenne)',
-                    data: mockVisits,
-                    borderColor: '#457B9D',
-                    backgroundColor: 'rgba(69, 123, 157, 0.2)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointBackgroundColor: '#1D3557',
-                    pointRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
-            }
-        });
+    try {
+        if (document.getElementById('timeChart')) {
+            Highcharts.chart('timeChart', {
+                chart: {
+                    type: 'area',
+                    backgroundColor: 'transparent',
+                    style: { fontFamily: 'Inter, sans-serif' }
+                },
+                title: { text: '' },
+                xAxis: { categories: hours, labels: { style: { color: '#2B3674' } } },
+                yAxis: { title: { text: '' }, gridLineColor: 'rgba(224, 229, 242, 0.5)' },
+                plotOptions: {
+                    area: {
+                        marker: { enabled: true, radius: 4 },
+                        fillColor: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0, 'rgba(43, 54, 116, 0.8)'],
+                                [1, 'rgba(43, 54, 116, 0.1)']
+                            ]
+                        },
+                        lineColor: '#2B3674',
+                        color: '#2B3674'
+                    }
+                },
+                series: [{ name: 'Visiteurs', data: mockVisits }],
+                credits: { enabled: false }
+            });
+        }
+    } catch (e) {
+        console.error("Erreur graphique Area:", e);
     }
 }
 
